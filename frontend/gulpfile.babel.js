@@ -91,11 +91,10 @@ gulp.task('js:app', ['js:lint'],
       .external(_.keys(dependencies))
       .bundle()
       .on('error', function(err) { // Cannot use => syntax here, as `this` must be set by the caller
-        console.log('js:app', err.stack);
+        console.log('js:app error', err, err.stack);
         this.emit('end');
       })
     ,source('app.js')
-    ,p('js:app')
     ,gulp.dest(paths.dev.$)
     ,reload({stream: true})
   ]));
