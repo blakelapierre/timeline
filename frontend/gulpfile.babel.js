@@ -121,7 +121,7 @@ gulp.task('less:concat', ['less:debug'],
     ,reload({stream: true})
   ]));
 
-gulp.task('less:debug', ['sprites'],
+gulp.task('less:debug', [/*'sprites'*/],
   () => multipipe( // my gulp-pipe fails here because of the less().on [doesn't forward errors]
     gulp.src(paths.src.less)
     ,cached('less')

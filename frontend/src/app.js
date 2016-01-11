@@ -1,5 +1,3 @@
-import baseAngular from './modules/base-angular';
+import {timeline} from './modules/timeline';
 
-module.exports = {
-  'base-angular': baseAngular['base-angular']
-};
+module.exports = { timeline };
