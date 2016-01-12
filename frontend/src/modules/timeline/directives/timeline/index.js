@@ -24,6 +24,8 @@ module.exports = () => {
         top: 0
       };
 
+      $scope.lineTimeOffset = 0;
+
       $scope.option = {timeDecimals: 3};
       $scope.newItem = {
         isNew: false
@@ -65,6 +67,17 @@ module.exports = () => {
         console.log($scope.offsetTotal);
       };
 
+      $scope.wheelLine = $event => {
+        console.log($event);
+        $scope.lineTimeOffset += $event.deltaY * 100;
+        setTime($scope);
+      };
+
+      $scope.goToNow = () => {
+        $scope.lineTimeOffset = 0;
+        setTime($scope);
+      };
+
       $scope.updateRate = 10;
       $interval(() => setTime($scope), 1000 / $scope.updateRate);
       $timeout(() => setTime($scope), 0);
@@ -75,7 +88,7 @@ module.exports = () => {
 };
 
 function setTime($scope) {
-  $scope.timeCurrent = new Date();
+  $scope.timeCurrent = new Date(new Date().getTime() - $scope.lineTimeOffset);
 
   $scope.timeBegin = $scope.timeCurrent.getTime() - $scope.offsetHalf;
   $scope.timeEnd =  $scope.timeCurrent.getTime() + $scope.offsetHalf;

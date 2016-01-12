@@ -1,14 +1,20 @@
 <ng-transclude></ng-transclude>
-<span class="time-begin">
+<div class="time-begin">
   <div class="absolute-relative">{{timeBegin | date : 'mediumTime'}}</div>
   <div class="">{{timeBegin / 1000 % 3600 | number : option.timeDecimals}}</div>
-</span>
-<span class="time-current"
+</div>
+<div class="time-current"
       ng-wheel="wheelCurrent($event)">
-  <div class="absolute-relative">{{timeCurrent | date : 'mediumTime'}}</div>
-  <div class="">{{timeCurrent / 1000 % 3600 | number : option.timeDecimals}}</div>
-</span>
-<span class="time-end">
+  <div ng-if="lineTimeOffset !== 0">
+    <button class="go-to-now"
+            ng-click="goToNow()">Go To Now</button>
+  </div>
+  <div>
+    <div class="absolute-relative">{{timeCurrent | date : 'mediumTime'}}</div>
+    <div class="">{{timeCurrent / 1000 % 3600 | number : option.timeDecimals}}</div>
+  </div>
+</div>
+<div class="time-end">
   <div class="absolute-relative">{{timeEnd | date : 'mediumTime'}}</div>
   <div class="">{{timeEnd / 1000 % 3600 | number : option.timeDecimals}}</div>
-</span>
+</div>

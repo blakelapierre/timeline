@@ -17,7 +17,24 @@ time {
   }
 
   .time-current {
+    display: flex;
+
     top: calc(50% - 1em);
+
+    .go-to-now {
+      background: transparent;
+      border: none;
+      color: #000;
+      font-weight: bolder;
+      font-size: 1.1em;
+      cursor: pointer;
+
+      box-shadow: inset 0px 0px 3em #fff;
+
+      &:hover {
+        text-shadow: 0px 0px 2em #fff;
+      }
+    }
   }
 
   .time-end {
