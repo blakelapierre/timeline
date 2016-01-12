@@ -1,1 +1,5 @@
-  <span>{{item.time | date : 'mediumTime'}} {{item.text}}</span>
+<div>{{item.time | date : 'mediumTime'}} {{item.text}}</div>
+<div class="end"
+     ng-if="item.endTime === undefined">
+  <button ng-click="addNewItem()">End</button>
+</div>

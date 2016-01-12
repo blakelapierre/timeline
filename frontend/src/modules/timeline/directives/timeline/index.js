@@ -63,13 +63,10 @@ module.exports = () => {
         $scope.offsetBegin = ($scope.offsetEnd = $scope.timeCurrent.getTime() + $scope.offsetHalf) - $scope.offsetTotal;
         $scope.offsetBegin = new Date($scope.offsetBegin);
         $scope.offsetEnd = new Date($scope.offsetEnd);
-
-        console.log($scope.offsetTotal);
       };
 
-      $scope.wheelLine = $event => {
-        console.log($event);
-        $scope.lineTimeOffset += $event.deltaY * 100;
+      $scope.wheelTime = $event => {
+        $scope.lineTimeOffset -= $event.deltaY * 100;
         setTime($scope);
       };
 
