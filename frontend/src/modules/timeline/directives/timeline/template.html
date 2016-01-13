@@ -1,4 +1,4 @@
-<time ng-wheel="wheelTime($event)">
+<time ng-wheel="wheelTime($event)" ng-touch="touchTime($event)">
   <line ng-style="lineStyle">
     <item ng-repeat="item in items" ng-style="{top: (item.time - offsetBegin) / offsetTotal * 100 + '%', height: getDuration(item) / offsetTotal * 100 + '%'}"></item>
   </line>

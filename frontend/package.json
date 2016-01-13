@@ -4,7 +4,8 @@
   "repository": "https://github.com/blakelapierre/base-angular",
   "version": "0.0.6",
   "dependencies": {
-    "angular": "^1.4.7"
+    "angular": "^1.4.7",
+    "angular-touch": "^1.4.8"
   },
   "devDependencies": {
     "babel": "^6.3.13",

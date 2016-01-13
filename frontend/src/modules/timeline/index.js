@@ -1,7 +1,8 @@
 require('angular');
+require('angular-touch');
 
 module.exports = {
-  'timeline':  angular.module('timeline', [])
+  'timeline':  angular.module('timeline', ['ngTouch'])
     .directive('timeline',     require('./directives/timeline'))
     .directive('time',         require('./directives/timeline/time'))
     .directive('line',         require('./directives/timeline/line'))

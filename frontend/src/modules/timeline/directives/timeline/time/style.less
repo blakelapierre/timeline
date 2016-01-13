@@ -1,43 +1,66 @@
 time {
   position: relative;
 
-  .time-begin,
-  .time-current,
-  .time-end {
-    position: absolute;
-    right: 0;
+  .time-scale {
+    .time-begin,
+    .time-current,
+    .time-end {
+      position: absolute;
+      right: 1px;
 
-    text-align: right;
+      text-align: right;
 
-    z-index: 3;
-  }
+      z-index: 3;
+    }
 
-  .time-begin {
-    top: 0;
-  }
+    .time-begin {
+      top: 0;
+    }
 
-  .time-current {
-    display: flex;
+    .time-current {
+      display: flex;
 
-    top: calc(50% - 1em);
+      top: calc(50% - 1em);
 
-    .go-to-now {
-      background: transparent;
-      border: none;
-      color: #000;
-      font-weight: bolder;
-      font-size: 1.1em;
-      cursor: pointer;
+      .go-to-now {
+        margin-right: 1em;
 
-      box-shadow: inset 0px 0px 3em #fff;
+        background: transparent;
+        border: none;
+        color: #000;
+        font-weight: bolder;
+        font-size: 1.1em;
+        cursor: pointer;
 
-      &:hover {
-        text-shadow: 0px 0px 2em #fff;
+        box-shadow: inset 0px 0px 3em #fff;
+
+        &:hover {
+          text-shadow: 0px 0px 2em #fff;
+        }
       }
+    }
+
+    .time-end {
+      bottom: 0;
     }
   }
 
-  .time-end {
+  .time-day-location {
+    position: absolute;
+
+    top: 0;
+    right: 0;
     bottom: 0;
+
+    width: 1px;
+
+    .bar {
+      position: absolute;
+
+      right: 0;
+      width: 1px;
+
+      background-color: #fff;
+    }
   }
 }

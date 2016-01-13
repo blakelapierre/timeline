@@ -1,20 +1,26 @@
 <ng-transclude></ng-transclude>
-<div class="time-begin">
-  <div class="absolute-relative">{{timeBegin | date : 'mediumTime'}}</div>
-  <div class="">{{timeBegin / 1000 % 3600 | number : option.timeDecimals}}</div>
-</div>
-<div class="time-current"
-      ng-wheel="wheelCurrent($event)">
-  <div ng-if="lineTimeOffset !== 0">
-    <button class="go-to-now"
-            ng-click="goToNow()">Go To Now</button>
+<div class="time-scale">
+  <div class="time-begin">
+    <div class="absolute-relative">{{timeBegin | date : 'mediumTime'}}</div>
+    <div class="">+{{(timeBegin - startOfDay)/ 1000 | number : option.timeDecimals}}</div>
   </div>
-  <div>
-    <div class="absolute-relative">{{timeCurrent | date : 'mediumTime'}}</div>
-    <div class="">{{timeCurrent / 1000 % 3600 | number : option.timeDecimals}}</div>
+  <div class="time-current"
+        ng-wheel="wheelCurrent($event)">
+    <div ng-if="lineTimeOffset !== 0">
+      <button class="go-to-now"
+              ng-click="goToNow()">Go To Now</button>
+    </div>
+    <div>
+      <div class="absolute-relative">{{timeCurrent | date : 'mediumTime'}}</div>
+      <div class="">+{{(timeCurrent - startOfDay) / 1000 | number : option.timeDecimals}}</div>
+      <div class="">+|{{(timeCurrent - startOfDay + utcAdjustment) / 1000 | number : option.timeDecimals}}</div>
+    </div>
+  </div>
+  <div class="time-end">
+    <div class="absolute-relative">{{timeEnd | date : 'mediumTime'}}</div>
+    <div class="">+{{(timeEnd -startOfDay) / 1000 | number : option.timeDecimals}}</div>
   </div>
 </div>
-<div class="time-end">
-  <div class="absolute-relative">{{timeEnd | date : 'mediumTime'}}</div>
-  <div class="">{{timeEnd / 1000 % 3600 | number : option.timeDecimals}}</div>
+<div class="time-day-location">
+  <div class="bar" ng-style="timeDayLocationBarStyle"></div>
 </div>
