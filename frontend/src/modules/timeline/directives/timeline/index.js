@@ -13,8 +13,20 @@ module.exports = () => {
         }
       ];
 
+      $scope.options = {
+        timeDecimals: 0,
+
+        updateRate: 1,
+
+        dayStartUTCOffset: 0,
+
+        defaultViewPeriod: 1000 * 60 * 20, // 20 minutes
+      };
+
+      $scope.lengthOfDay = 1000 * 60 * 60 * 24; // 1000ms/s * 60s/m * 60m/h * 24h/d = 86,400,000ms/d
+
       $scope.utcAdjustment = new Date().getTimezoneOffset() * 60 * 1000;
-      $scope.offsetTotal = 1000 * 60 * 5;
+      $scope.offsetTotal = $scope.options.defaultViewPeriod;
       $scope.offsetHalf = $scope.offsetTotal / 2;
 
       $scope.timeCurrent = new Date();
@@ -32,12 +44,6 @@ module.exports = () => {
 
       $scope.option = {timeDecimals: 0};
       $scope.updateRate = 1;
-
-      // $scope.option = {timeDecimals: 1};
-      // $scope.updateRate = 10;
-
-      // $scope.option = {timeDecimals: 2};
-      // $scope.updateRate = 30;
 
       $scope.newItem = {
         isNew: false
@@ -67,12 +73,12 @@ module.exports = () => {
       };
 
       $scope.wheelCurrent = $event => {
-        $scope.offsetTotal = Math.max(1000 * 5, $scope.offsetTotal + $event.deltaY * 10000);
+        $scope.offsetTotal = Math.round(Math.max(1000 * 5, $scope.offsetTotal + $event.deltaY * $scope.offsetTotal / 1000));
 
         $scope.offsetHalf = $scope.offsetTotal / 2;
 
-        $scope.timeCurrent = new Date();
-        $scope.offsetBegin = ($scope.offsetEnd = $scope.timeCurrent.getTime() + $scope.offsetHalf) - $scope.offsetTotal;
+        $scope.timeCurrent = new Date().getTime();
+        $scope.offsetBegin = ($scope.offsetEnd = $scope.timeCurrent + $scope.offsetHalf) - $scope.offsetTotal;
         $scope.offsetBegin = new Date($scope.offsetBegin);
         $scope.offsetEnd = new Date($scope.offsetEnd);
 
@@ -82,7 +88,7 @@ module.exports = () => {
       };
 
       $scope.wheelTime = $event => {
-        $scope.lineTimeOffset -= $event.deltaY * 100000;
+        $scope.lineTimeOffset -= 1 / $event.deltaY * $scope.offsetTotal;
 
         $scope.$apply(() => setTime($scope));
 
@@ -109,16 +115,16 @@ function setTime($scope) {
   const now = new Date().getTime();
 
   $scope.startOfDay = startOfDay().getTime();
-  $scope.timeCurrent = new Date(now - $scope.lineTimeOffset);
+  $scope.timeCurrent = new Date(now - $scope.lineTimeOffset).getTime();
 
-  $scope.timeBegin = $scope.timeCurrent.getTime() - $scope.offsetHalf;
-  $scope.timeEnd =  $scope.timeCurrent.getTime() + $scope.offsetHalf;
+  $scope.timeBegin = $scope.timeCurrent - $scope.offsetHalf;
+  $scope.timeEnd =  $scope.timeCurrent + $scope.offsetHalf;
 
   $scope.lineOffset = -($scope.timeBegin - $scope.offsetBegin.getTime()) / $scope.offsetTotal;
   $scope.lineStyle.top = $scope.lineOffset * 100 + '%';
 
-  $scope.timeDayLocationBarStyle.top = ($scope.timeCurrent - $scope.startOfDay) / (1000 * 60 * 60 * 24) * 100 + '%';
-  $scope.timeDayLocationBarStyle.height = $scope.offsetTotal / (1000 * 60 * 60 * 24) * 100 + '%';
+  $scope.timeDayLocationBarStyle.top = ($scope.timeBegin - $scope.startOfDay) / $scope.lengthOfDay * 100 + '%';
+  $scope.timeDayLocationBarStyle.height = Math.min(1, $scope.offsetTotal / $scope.lengthOfDay) * 100 + '%';
 }
 
 function startOfDay() {
