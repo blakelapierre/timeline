@@ -9,4 +9,6 @@ module.exports = {
     .directive('item',         require('./directives/timeline/item'))
     .directive('itemAdder',    require('./directives/timeline/item-adder'))
     .directive('ngWheel',      require('./directives/ngWheel'))
+
+    .factory('timelineData',   require('./factories/timelineData'))
 };

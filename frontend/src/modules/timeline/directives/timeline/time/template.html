@@ -2,25 +2,26 @@
 <div class="time-scale">
   <div class="time-begin">
     <div class="absolute-relative">{{timeBegin | date : 'mediumTime'}}</div>
-    <div class="">+{{(timeBegin - startOfDay)/ 1000 | number : options.timeDecimals}}</div>
+    <div class="">+{{((timeBegin - startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
   </div>
   <div class="time-current"
         ng-wheel="wheelCurrent($event)">
     <div ng-if="lineTimeOffset !== 0">
       <button class="go-to-now"
-              ng-click="goToNow()">Go To Now</button>
+              ng-click="goToNow()">Go To Now {{now - timeCurrent > 0 ? '+' : ''}}{{(now - timeCurrent) / 1000 | number : options.timeDecimals}}s ({{now | date : 'mediumTime'}})</button>
     </div>
     <div>
       <div class="absolute-relative">{{timeCurrent | date : 'mediumTime'}}</div>
-      <div class="">+{{(timeCurrent - startOfDay) / 1000 | number : options.timeDecimals}}</div>
-      <div class="">+|{{(timeCurrent - startOfDay + utcAdjustment) / 1000 | number : options.timeDecimals}}</div>
+      <div class="">+{{((timeCurrent - startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
+      <div class="">+|{{((timeCurrent - startOfDay + utcAdjustment) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
     </div>
   </div>
   <div class="time-end">
     <div class="absolute-relative">{{timeEnd | date : 'mediumTime'}}</div>
-    <div class="">+{{(timeEnd -startOfDay) / 1000 | number : options.timeDecimals}}</div>
+    <div class="">+{{((timeEnd -startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
   </div>
 </div>
 <div class="time-day-location">
   <div class="bar" ng-style="timeDayLocationBarStyle"></div>
+  <div class="bar" ng-style="timeDayLocationOverflowBarStyle"></div>
 </div>
