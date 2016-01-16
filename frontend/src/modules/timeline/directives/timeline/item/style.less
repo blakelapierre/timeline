@@ -7,15 +7,19 @@ item {
 
   background-color: #111;
 
-  // cursor: pointer;
+  cursor: pointer;
 
   .end {
+    min-height: 3em;
     height: 100%;
     // position: absolute;
     // bottom: 0;
 
     button {
       height: 100%;
+
+      margin: 0;
+      padding: 0 0.5em;
 
       background: #66d;
       border: none;
@@ -34,14 +38,11 @@ item {
     height: 100%;
     width: 100%;
 
-    position: absolute;
-
     display: flex;
 
     background-color: #111;
 
     .times {
-      // position: relative;
       height: 100%;
 
       display: flex;
@@ -53,8 +54,7 @@ item {
       white-space: nowrap;
 
       .background {
-        position: relative;
-
+        min-height: 3em;
         height: 100%;
 
         display: flex;
@@ -67,26 +67,33 @@ item {
         .time {
           background-color: #fff;
           color: #000;
-
-          cursor: pointer;
         }
 
         .end-time {
+          background-color: #000;
+          // color: #000;
         }
       }
     }
 
-    .data {
-      flex: 1 1 auto;
+    .body {
+      position: absolute;
+      bottom: 0;
+
+      .data {
+      }
     }
   }
 
   &:hover {
+    // min-height: 3em;
+
     border: solid 1px #444;
 
     z-index: 2;
 
     .item-content {
+
       background-color: #333;
 
       .data {
