@@ -1,68 +1,96 @@
 time {
   position: relative;
 
-  .time-scale {
-    .time-begin,
-    .time-current,
-    .time-end {
-      position: absolute;
-      right: 1px;
-
-      text-align: right;
-
-      z-index: 3;
-    }
-
-    .time-begin {
-      top: 0;
-    }
-
-    .time-current {
-      display: flex;
-
-      top: calc(50% - 1em);
-
-      .go-to-now {
-        margin-right: 1em;
-
-        background: transparent;
-        border: none;
-        color: #000;
-        font-weight: bolder;
-        font-size: 1.1em;
-        cursor: pointer;
-
-        box-shadow: inset 0px 0px 3em #fff;
-
-        &:hover {
-          text-shadow: 0px 0px 2em #fff;
-        }
-      }
-    }
-
-    .time-end {
-      bottom: 0;
-    }
-  }
-
-  .time-day-location {
+  .overlay {
     position: absolute;
 
-    top: 0;
     right: 0;
-    bottom: 0;
+    height: 100%;
 
-    width: 1px;
+    display: flex;
 
     z-index: 3;
 
-    .bar {
+    white-space: nowrap;
+
+    settings {
+      margin-right: 1em;
+    }
+
+    .time-scale {
+      position: relative;
+      top: 0;
+      right: 1px;
+      bottom: 0;
+
+      flex: 0 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      text-align: right;
+
+      .time-begin,
+      .time-current,
+      .time-end {
+      }
+
+      .time-begin {
+        top: 0;
+      }
+
+      .time-current {
+        display: flex;
+
+        top: calc(50% - 1em);
+
+        .go-to-now-wrapper {
+          position: absolute;
+          right: 100%;
+
+          .go-to-now {
+            margin-right: 1em;
+
+            background: transparent;
+            border: none;
+            color: #000;
+            font-weight: bolder;
+            font-size: 1.1em;
+            cursor: pointer;
+
+            box-shadow: inset 0px 0px 3em #fff;
+
+            &:hover {
+              text-shadow: 0px 0px 2em #fff;
+            }
+          }
+        }
+      }
+
+      .time-end {
+        bottom: 0;
+      }
+    }
+
+    .time-day-location {
       position: absolute;
 
+      top: 0;
       right: 0;
+      bottom: 0;
+
       width: 1px;
 
-      background-color: #fff;
+      .bar {
+        position: absolute;
+
+        right: 0;
+        width: 1px;
+
+        background-color: #fff;
+      }
     }
   }
 }

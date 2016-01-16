@@ -75,7 +75,13 @@ module.exports = () => {
       };
 
       $scope.wheelCurrent = $event => {
-        $scope.offsetTotal = Math.round(Math.max(1000 * 5, $scope.offsetTotal + $event.deltaY * $scope.offsetTotal / 1000));
+        $scope.setOffsetTotal(Math.round(Math.max(1000 * 5, $scope.offsetTotal + $event.deltaY * $scope.offsetTotal / 1000)));
+
+        $event.stopPropagation();
+      };
+
+      $scope.setOffsetTotal = total => {
+        $scope.offsetTotal = total;
 
         $scope.offsetHalf = $scope.offsetTotal / 2;
 
@@ -85,16 +91,20 @@ module.exports = () => {
         $scope.offsetEnd = new Date($scope.offsetEnd);
 
         $scope.$apply(() => setTime($scope));
-
-        $event.stopPropagation();
       };
 
       $scope.wheelTime = $event => {
-        $scope.lineTimeOffset -= 1 / $event.deltaY * $scope.offsetTotal;
+        $scope.setLineTimeOffset($scope.lineTimeOffset - 1 / $event.deltaY * $scope.offsetTotal);
 
         $scope.$apply(() => setTime($scope));
 
         $event.stopPropagation();
+      };
+
+      $scope.setLineTimeOffset = offset => {
+        console.log('setting', $scope.lineTimeOffset, offset);
+        $scope.lineTimeOffset = offset;
+        $scope.$apply(() => setTime($scope));
       };
 
       $scope.touchTime = $event => console.log({$event});

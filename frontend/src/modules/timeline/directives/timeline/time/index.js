@@ -5,12 +5,13 @@ module.exports = ['$swipe', $swipe => {
     transclude: true,
     template: require('./template.html'),
     link($scope, element, attributes) {
-      // $swipe.bind(element, {
-      //   start:  event => console.log('start', event),
-      //   move:   event => console.log('move', event),
-      //   end:    event => console.log('end', event),
-      //   cancel: event => console.log('cancel', event),
-      // });
+      let startY;
+      $swipe.bind(element, {
+        start:  ({x, y}) => startY = y,
+        move:   ({x, y}) => {console.log(y, startY); $scope.setLineTimeOffset($scope.lineTimeOffset + (1 / (y - startY)) * $scope.offsetTotal);},
+        end:    event => console.log('end', event),
+        cancel: event => console.log('cancel', event),
+      });
     }
   };
 }];
