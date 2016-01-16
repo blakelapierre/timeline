@@ -51,7 +51,7 @@ module.exports = () => {
           $scope.isNew = false;
           $scope.newItem.time = new Date();
           // $scope.items.push($scope.newItem);
-          if ($scope.currentItem) timelineData.endItem($scope.currentItem);
+          if ($scope.currentItem && $scope.currentItem.endTime === undefined) timelineData.endItem($scope.currentItem);
           $scope.currentItem = addGenericItem(timelineData, $scope.newItem);
           // timelineData.addItem($scope.newItem);
         }
