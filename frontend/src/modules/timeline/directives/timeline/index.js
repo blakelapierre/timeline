@@ -5,26 +5,9 @@ module.exports = () => {
     template: require('./template.html'),
     controller: ['$scope', '$interval', '$timeout', 'timelineData',
                  ($scope, $interval, $timeout, timelineData) => {
-      const startupTime = new Date();
-
-      timelineData.addItem({
-        time: startupTime,
-        endTime: new Date(startupTime.getTime() + 1),
-        type: 'startup',
-        text: 'startup'
-      });
+      // addStartupItem(timelineData);
 
       $scope.items = timelineData.getItems();
-
-      console.log($scope.items);
-      // $scope.items = [
-      //   {
-      //     time: startupTime,
-      //     endTime: new Date(startupTime.getTime() + 1),
-      //     type: 'startup',
-      //     text: 'startup'
-      //   }
-      // ];
 
       $scope.options = {
         timeDecimals: 0,
@@ -33,7 +16,7 @@ module.exports = () => {
 
         dayStartUTCOffset: 0,
 
-        defaultViewPeriod: 1000 * 60 * 20, // 20 minutes
+        defaultViewPeriod: 1000 * 60 * 2
       };
 
       $scope.lengthOfDay = 1000 * 60 * 60 * 24; // 1000ms/s * 60s/m * 60m/h * 24h/d = 86,400,000ms/d
@@ -64,7 +47,7 @@ module.exports = () => {
       };
       $scope.isNew = true;
 
-      $scope.getDuration = item => (item.endTime || new Date()).getTime() - item.time;
+      $scope.getDuration = item => (item.endTime || new Date().getTime()) - item.time;
 
       $scope.newItemChanged = newValue => {
         if ($scope.isNew) initializeNewItem();
@@ -73,18 +56,23 @@ module.exports = () => {
           $scope.isNew = false;
           $scope.newItem.time = new Date();
           // $scope.items.push($scope.newItem);
-          timelineData.addItem($scope.newItem);
+          $scope.currentItem = addGenericItem(timelineData, $scope.newItem);
+          // timelineData.addItem($scope.newItem);
         }
       };
 
       $scope.newItemKeypress = $event => {
         if ($event.keyCode === 13) $scope.addNewItem();
+        if ($scope.currentItem) updateItem(timelineData, $scope.currentItem, $scope.newItem);
       };
+
+      $scope.endItem = item => timelineData.endItem(item);
 
       $scope.addNewItem = () => {
         $scope.isNew = true;
-        $scope.newItem.endTime = new Date();
         $scope.newItem = {};
+
+        $scope.endItem($scope.currentItem);
       };
 
       $scope.wheelCurrent = $event => {
@@ -121,6 +109,28 @@ module.exports = () => {
       $timeout(() => setTime($scope), 0);
 
       console.log('timeline', $scope);
+
+      function addStartupItem(timelineData) {
+        const startupTime = new Date();
+        return timelineData.endItem(
+          timelineData.addItem(startupTime, {
+            type: 'startup',
+            text: 'startup'
+          }),
+          new Date(startupTime.getTime() + 1)
+        );
+      }
+
+      function addGenericItem(timelineData, item) {
+        return timelineData.addItem(item.time, {
+          type: 'generic',
+          text: item.text
+        });
+      }
+
+      function updateItem(timelineData, item, data) {
+        return timelineData.updateItem(item, data);
+      }
     }]
   };
 };

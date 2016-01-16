@@ -1,5 +1,15 @@
 <div class="end"
      ng-if="item.endTime === undefined">
-  <button ng-click="addNewItem()">End</button>
+  <button ng-click="endItem(item)">End</button>
 </div>
-<div class="item-content">{{item.time | date : 'mediumTime'}} {{item.text}}</div>
+<div class="item-content">
+  <div class="times">
+    <span class="time">{{item.time | date : 'mediumTime'}}</span>
+    <span class="duration">+{{((item.endTime || now) - item.time) / 1000 | number : options.timeDecimals}}</span>
+    <span class="end-time" ng-if="item.endTime">{{item.endTime | date : 'mediumTime'}}</span>
+  </div>
+  <div class="data">
+    <span class="type">{{item.data.type}}</span>
+    <span class="text">{{item.data.text}}</span>
+  </div>
+</div>

@@ -1,20 +1,75 @@
 item {
+  height: 100%;
+
   display: flex;
 
   overflow: visible;
 
-  background-color: #333;
+  background-color: #111;
 
-  cursor: pointer;
+  // cursor: pointer;
 
   .end {
     // position: absolute;
     // bottom: 0;
+
+    button {
+      background: #66d;
+      border: none;
+      color: #fff;
+      font-weight: bolder;
+
+      cursor: pointer;
+
+      &:hover {
+        background: #33f;
+      }
+    }
+  }
+
+  .item-content {
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+
+    display: flex;
+
+    // width: 100%;
+
+    background-color: #111;
+
+    .times {
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      .time {
+        background-color: #fff;
+        color: #000;
+
+        cursor: pointer;
+      }
+
+      .end-time {
+      }
+    }
+
+    .data {
+      position: absolute;
+
+      width: 100%;
+    }
   }
 
   &:hover {
     z-index: 2;
 
-    background-color: #666;
+    .item-content {
+      .data {
+        border: solid 1px #fff;
+      }
+    }
   }
 }
