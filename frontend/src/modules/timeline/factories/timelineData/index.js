@@ -31,5 +31,6 @@ module.exports = () => {
   function getItemType(item) {
     console.log('getting item type', item);
     if (item && item.data && item.data.type === 'generic') return 'updateGenericItem';
+    if (item && item.data && item.data.type === 'startup') return 'updateGenericItem';
   }
 };

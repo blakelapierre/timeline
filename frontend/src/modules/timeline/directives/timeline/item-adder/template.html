@@ -3,5 +3,5 @@
        ng-model="newItem.text"
        ng-change="newItemChanged()"
        ng-keyup="newItemKeypress($event)"
-       ng-blur="addNewItem()"
+       ng-blur="itemAdderBlur()"
        size="{{newItem.text.length || 5}}">

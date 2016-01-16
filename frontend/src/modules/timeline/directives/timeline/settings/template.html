@@ -1,0 +1,27 @@
+<div class="update-rate">
+  <label>Update Rate</label>
+  <select ng-model="options.updateRate" convert-to-number>
+    <option value="0.016667">1 : 60 seconds</option>
+    <option value="0.03333">1 : 30 seconds</option>
+    <option value="0.05">1 : 20 seconds</option>
+    <option value="0.1">1 : 10 seconds</option>
+    <option value="0.2">1 : 5 seconds</option>
+    <option value="1">1 : 1 second</option>
+    <option value="2">2 : 1 second</option>
+    <option value="3">3 : 1 second</option>
+    <option value="4">4 : 1 second</option>
+    <option value="5">5 : 1 second</option>
+    <option value="10">10 : 1 second</option>
+    <option value="15">15 : 1 second</option>
+    <option value="20">20 : 1 second</option>
+    <option value="25">25 : 1 second</option>
+    <option value="30">30 : 1 second</option>
+    <option value="60">60 : 1 second</option>
+  </select>
+</div>
+
+<div class="start-of-day">
+  <label>Start Of Day</label>
+  <input type="range" ng-model="options.dayStartOffset" min="0" max="86400">
+  {{options.dayStartOffset | number}}
+</div>

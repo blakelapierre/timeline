@@ -16,7 +16,6 @@ module.exports = () => {
       attributes.$observe('ngWheel', value => console.log(value));
 
       function wheel($event) {
-        console.log($event, evalStatement, attributes);
         if (evalStatement) $scope.$eval(evalStatement, {$event});
       }
     }

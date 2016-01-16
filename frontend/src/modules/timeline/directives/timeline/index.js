@@ -5,16 +5,16 @@ module.exports = () => {
     template: require('./template.html'),
     controller: ['$scope', '$interval', '$timeout', 'timelineData',
                  ($scope, $interval, $timeout, timelineData) => {
-      // addStartupItem(timelineData);
+      $scope.currentItem = addStartupItem(timelineData);
 
       $scope.items = timelineData.getItems();
 
       $scope.options = {
         timeDecimals: 0,
 
-        updateRate: 0.2,
+        updateRate: 1,
 
-        dayStartUTCOffset: 0,
+        dayStartOffset: 0,
 
         defaultViewPeriod: 1000 * 60 * 2
       };
@@ -51,6 +51,7 @@ module.exports = () => {
           $scope.isNew = false;
           $scope.newItem.time = new Date();
           // $scope.items.push($scope.newItem);
+          if ($scope.currentItem) timelineData.endItem($scope.currentItem);
           $scope.currentItem = addGenericItem(timelineData, $scope.newItem);
           // timelineData.addItem($scope.newItem);
         }
@@ -62,6 +63,11 @@ module.exports = () => {
       };
 
       $scope.endItem = item => timelineData.endItem(item);
+
+      $scope.itemAdderBlur = () => {
+        $scope.isNew = true;
+        $scope.newItem = {};
+      };
 
       $scope.addNewItem = () => {
         $scope.isNew = true;
@@ -98,20 +104,25 @@ module.exports = () => {
         setTime($scope);
       };
 
-      $interval(() => setTime($scope), 1000 / $scope.options.updateRate);
+      let updater = startUpdating();
       $timeout(() => setTime($scope), 0);
 
-      console.log('timeline', $scope);
+      $scope.$watch('options.updateRate', () => {
+        $interval.cancel(updater);
+        updater = startUpdating();
+      });
+
+      function startUpdating() {
+        console.log('start updating', $scope.options.updateRate);
+        return $interval(() => setTime($scope), 1000 / $scope.options.updateRate);
+      }
 
       function addStartupItem(timelineData) {
         const startupTime = new Date();
-        return timelineData.endItem(
-          timelineData.addItem(startupTime, {
-            type: 'startup',
-            text: 'startup'
-          }),
-          new Date(startupTime.getTime() + 1)
-        );
+        return timelineData.addItem(startupTime, {
+          type: 'startup',
+          text: 'Started up and doing nothing'
+        });
       }
 
       function addGenericItem(timelineData, item) {
@@ -131,7 +142,7 @@ module.exports = () => {
 function setTime($scope) {
   $scope.now = new Date().getTime();
 
-  $scope.startOfDay = startOfDay().getTime();
+  $scope.startOfDay = startOfDay().getTime() + $scope.options.dayStartOffset * 1000;
   $scope.timeCurrent = new Date($scope.now - $scope.lineTimeOffset).getTime();
 
   $scope.timeBegin = $scope.timeCurrent - $scope.offsetHalf;
