@@ -10,10 +10,13 @@ item {
   // cursor: pointer;
 
   .end {
+    height: 100%;
     // position: absolute;
     // bottom: 0;
 
     button {
+      height: 100%;
+
       background: #66d;
       border: none;
       color: #fff;
@@ -35,40 +38,58 @@ item {
 
     display: flex;
 
-    // width: 100%;
-
     background-color: #111;
 
     .times {
+      // position: relative;
+      height: 100%;
+
       display: flex;
-      flex-direction: column;
 
-      justify-content: space-between;
+      flex: 0 0 auto;
 
-      .time {
-        background-color: #fff;
-        color: #000;
+      align-items: stretch;
 
-        cursor: pointer;
-      }
+      white-space: nowrap;
 
-      .end-time {
+      .background {
+        position: relative;
+
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        background-color: #f00;
+
+        .time {
+          background-color: #fff;
+          color: #000;
+
+          cursor: pointer;
+        }
+
+        .end-time {
+        }
       }
     }
 
     .data {
-      position: absolute;
-
-      width: 100%;
+      flex: 1 1 auto;
     }
   }
 
   &:hover {
+    border: solid 1px #444;
+
     z-index: 2;
 
     .item-content {
+      background-color: #333;
+
       .data {
-        border: solid 1px #fff;
       }
     }
   }

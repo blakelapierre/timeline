@@ -4,9 +4,11 @@
 </div>
 <div class="item-content">
   <div class="times">
-    <span class="time">{{item.time | date : 'mediumTime'}}</span>
-    <span class="duration">+{{((item.endTime || now) - item.time) / 1000 | number : options.timeDecimals}}</span>
-    <span class="end-time" ng-if="item.endTime">{{item.endTime | date : 'mediumTime'}}</span>
+    <div class="background">
+      <span class="time">{{item.time | date : 'mediumTime'}}</span>
+      <span class="duration">+{{((item.endTime || now) - item.time) / 1000 | number : options.timeDecimals}}</span>
+      <span class="end-time" ng-if="item.endTime !== undefined">{{item.endTime | date : 'mediumTime'}}</span>
+    </div>
   </div>
   <div class="data">
     <span class="type">{{item.data.type}}</span>

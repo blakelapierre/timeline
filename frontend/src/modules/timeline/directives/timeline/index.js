@@ -12,7 +12,7 @@ module.exports = () => {
       $scope.options = {
         timeDecimals: 0,
 
-        updateRate: 1,
+        updateRate: 0.2,
 
         dayStartUTCOffset: 0,
 
@@ -39,12 +39,7 @@ module.exports = () => {
 
       $scope.lineTimeOffset = 0;
 
-      $scope.option = {timeDecimals: 0};
-      $scope.updateRate = 1;
-
-      $scope.newItem = {
-        isNew: false
-      };
+      $scope.newItem = {};
       $scope.isNew = true;
 
       $scope.getDuration = item => (item.endTime || new Date().getTime()) - item.time;
@@ -71,8 +66,6 @@ module.exports = () => {
       $scope.addNewItem = () => {
         $scope.isNew = true;
         $scope.newItem = {};
-
-        $scope.endItem($scope.currentItem);
       };
 
       $scope.wheelCurrent = $event => {
@@ -105,7 +98,7 @@ module.exports = () => {
         setTime($scope);
       };
 
-      $interval(() => setTime($scope), 1000 / $scope.updateRate);
+      $interval(() => setTime($scope), 1000 / $scope.options.updateRate);
       $timeout(() => setTime($scope), 0);
 
       console.log('timeline', $scope);
