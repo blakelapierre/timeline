@@ -7,6 +7,8 @@ item {
 
   background-color: #111;
 
+  font-size: 0.85em;
+
   cursor: pointer;
 
   .end {
@@ -21,7 +23,7 @@ item {
       margin: 0;
       padding: 0 0.5em;
 
-      background: #66d;
+      background: hsla(0, 100%, 30%, 1);
       border: none;
       color: #fff;
       font-weight: bolder;
@@ -29,7 +31,7 @@ item {
       cursor: pointer;
 
       &:hover {
-        background: #33f;
+        background: hsla(0, 100%, 50%, 1);
       }
     }
   }
@@ -62,11 +64,15 @@ item {
 
         justify-content: space-between;
 
-        background-color: #f00;
+        background-color: hsla(120, 100%, 30%, 1);
 
         .time {
           background-color: #fff;
           color: #000;
+        }
+
+        .duration {
+          text-align: center;
         }
 
         .end-time {
@@ -78,7 +84,11 @@ item {
 
     .body {
       position: absolute;
-      bottom: 0;
+      // bottom: 0;
+
+      font-size: 1rem;
+
+      background-color: #000;
 
       .data {
       }

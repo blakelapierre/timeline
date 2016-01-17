@@ -1,7 +1,7 @@
 {{newItem.time | date : 'mediumTime'}}
 <input type="text"
-       ng-model="newItem.text"
+       ng-model="newItem.data.text"
        ng-change="newItemChanged()"
-       ng-keyup="newItemKeypress($event)"
+       ng-keyup="newItemKeyup($event)"
        ng-blur="itemAdderBlur()"
-       size="{{newItem.text.length || 5}}">
+       size="{{newItem.data.text.length || 5}}">

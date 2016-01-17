@@ -1,18 +1,18 @@
 <div class="end"
-     ng-if="item.endTime === undefined">
+     ng-if="item.event !== 'marker' && item.duration.endTime === undefined">
   <button ng-click="endItem(item)">End</button>
 </div>
 <div class="item-content">
   <div class="times">
     <div class="background">
-      <span class="time">{{item.time | date : 'mediumTime'}}</span>
-      <span class="duration">+{{((item.endTime || now) - item.time) / 1000 | number : options.timeDecimals}}</span>
-      <span class="end-time" ng-if="item.endTime !== undefined">{{item.endTime | date : 'mediumTime'}}</span>
+      <span class="time">{{item.event.time | date : 'mediumTime'}}</span>
+      <span class="duration">+{{getDuration(item) / 1000 | number : options.timeDecimals}}</span>
+      <span class="end-time" ng-if="item.duration && item.duration.endTime !== undefined">{{item.duration.endTime | date : 'mediumTime'}}</span>
     </div>
   </div>
   <div class="body">
     <div class="data">
-      <span class="type">{{item.data.type}}</span>
+      <span class="type">{{item.type}}</span>
       <span class="text">{{item.data.text}}</span>
     </div>
   </div>

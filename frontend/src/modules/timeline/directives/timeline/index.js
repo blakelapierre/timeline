@@ -7,6 +7,10 @@ module.exports = () => {
                  ($scope, $interval, $timeout, timelineData) => {
       $scope.currentItem = addStartupItem(timelineData);
 
+      const midnight = new Date();
+      midnight.setHours(18, 30, 0, 0);
+      // timelineData.newItem('marker', {time: midnight});
+
       $scope.items = timelineData.getItems();
 
       $scope.options = {
@@ -16,7 +20,7 @@ module.exports = () => {
 
         dayStartOffset: 0,
 
-        defaultViewPeriod: 1000 * 60 * 2
+        defaultViewPeriod: 1000 * 60 * 5
       };
 
       $scope.lengthOfDay = 1000 * 60 * 60 * 24; // 1000ms/s * 60s/m * 60m/h * 24h/d = 86,400,000ms/d
@@ -26,6 +30,7 @@ module.exports = () => {
       $scope.offsetHalf = $scope.offsetTotal / 2;
 
       $scope.timeCurrent = new Date();
+      $scope.now = $scope.timeCurrent.getTime();
       $scope.offsetBegin = ($scope.offsetEnd = $scope.timeCurrent.getTime() + $scope.offsetHalf) - $scope.offsetTotal;
       $scope.offsetBegin = new Date($scope.offsetBegin);
       $scope.offsetEnd = new Date($scope.offsetEnd);
@@ -39,39 +44,51 @@ module.exports = () => {
 
       $scope.lineTimeOffset = 0;
 
-      $scope.newItem = {};
+      $scope.newItem = {event: {}, data: {text: ''}};
       $scope.isNew = true;
 
-      $scope.getDuration = item => (item.endTime || new Date().getTime()) - item.time;
+      // $scope.getDuration = item => (item.event.endTime || new Date().getTime()) - item.event.time;
+      $scope.getDuration = item => {
+        // console.log(item);
+        if (item.duration) {
+          const duration = item.duration.getDuration(item, $scope.now);
+          console.log('duration', duration);
+          return duration;
+        }
+        return 0;
+      };
 
       $scope.newItemChanged = newValue => {
+        console.log('new item', newValue);
         if ($scope.isNew) initializeNewItem();
 
         function initializeNewItem() {
           $scope.isNew = false;
-          $scope.newItem.time = new Date();
+          $scope.newItem.event.time = new Date().getTime();
           // $scope.items.push($scope.newItem);
-          if ($scope.currentItem && $scope.currentItem.endTime === undefined) timelineData.endItem($scope.currentItem);
-          $scope.currentItem = addGenericItem(timelineData, $scope.newItem);
+          if ($scope.currentItem && $scope.currentItem.duration &&  $scope.currentItem.duration.endTime === undefined) timelineData.endItem($scope.currentItem);
+          $scope.currentItem = timelineData.newItem('generic');
+          $scope.now = new Date().getTime();
           // timelineData.addItem($scope.newItem);
         }
       };
 
-      $scope.newItemKeypress = $event => {
+      $scope.newItemKeyup = $event => {
+        console.log('keypress', $event, $scope.currentItem);
         if ($event.keyCode === 13) $scope.addNewItem();
-        if ($scope.currentItem) updateItem(timelineData, $scope.currentItem, $scope.newItem);
+        if (!$scope.isNew && $scope.currentItem) updateItem(timelineData, $scope.currentItem, $scope.newItem);
       };
 
-      $scope.endItem = item => timelineData.endItem(item);
+      $scope.endItem = item => timelineData.updateItem(item, {duration: {endTime: new Date().getTime()}});
 
       $scope.itemAdderBlur = () => {
         $scope.isNew = true;
-        $scope.newItem = {};
+        $scope.newItem = {event: {}, data: {text: ''}};
       };
 
       $scope.addNewItem = () => {
         $scope.isNew = true;
-        $scope.newItem = {};
+        $scope.newItem = {event: {}, data: {text: ''}};
       };
 
       $scope.wheelCurrent = $event => {
@@ -94,7 +111,7 @@ module.exports = () => {
       };
 
       $scope.wheelTime = $event => {
-        $scope.setLineTimeOffset($scope.lineTimeOffset - 1 / $event.deltaY * $scope.offsetTotal);
+        $scope.setLineTimeOffset($scope.lineTimeOffset - 3 / $event.deltaY * $scope.offsetTotal);
 
         $scope.$apply(() => setTime($scope));
 
@@ -128,18 +145,11 @@ module.exports = () => {
       }
 
       function addStartupItem(timelineData) {
-        const startupTime = new Date();
-        return timelineData.addItem(startupTime, {
-          type: 'startup',
-          text: 'Started up and doing nothing'
-        });
+        return timelineData.newItem('generic', {data: {text: 'Started up and doing nothing'}});
       }
 
-      function addGenericItem(timelineData, item) {
-        return timelineData.addItem(item.time, {
-          type: 'generic',
-          text: item.text
-        });
+      function addGenericItem(timelineData, {time, text}) {
+        return timelineData.newItem('generic', {data: {text}});
       }
 
       function updateItem(timelineData, item, data) {
