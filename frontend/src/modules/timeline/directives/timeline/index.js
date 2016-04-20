@@ -48,15 +48,7 @@ module.exports = () => {
       $scope.isNew = true;
 
       // $scope.getDuration = item => (item.event.endTime || new Date().getTime()) - item.event.time;
-      $scope.getDuration = item => {
-        // console.log(item);
-        if (item.duration) {
-          const duration = item.duration.getDuration(item, $scope.now);
-          console.log('duration', duration);
-          return duration;
-        }
-        return 0;
-      };
+      $scope.getDuration = item => item.duration ? item.duration.getDuration(item, $scope.now) : 0;
 
       $scope.newItemChanged = newValue => {
         console.log('new item', newValue);
