@@ -1,6 +1,37 @@
 timeline {
+  .week {
+    height: 3px;
+
+    display: flex;
+
+    background-color: #fff;
+
+    z-index: 4;
+
+    .day {
+      flex: 1 1 auto;
+
+      margin: 0;
+      padding: 0;
+
+      height: 3px;
+      width: calc(1 / 7 * 100%);
+
+      // border-right: 1px solid #fff;
+    }
+
+    .sunday {background-color: #f0f;}
+    .monday {background-color: #0f0;}
+    .tuesday {background-color: #f00;}
+    .wednesday {background-color: #0f0;}
+    .thursday {background-color: #ff0;}
+    .friday {background-color: #000;}
+    .saturday {background-color: #fff;}
+  }
+
   time {
     position: absolute;
+    // height: 100%;
 
     top: 0;
     left: 0;

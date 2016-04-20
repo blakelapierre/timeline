@@ -1,3 +1,13 @@
+<div class="week">
+  <span class="day sunday"></span>
+  <span class="day monday"></span>
+  <span class="day tuesday"></span>
+  <span class="day wednesday"></span>
+  <span class="day thursday"></span>
+  <span class="day friday"></span>
+  <span class="day saturday"></span>
+</div>
+
 <time ng-wheel="wheelTime($event)" ng-touch="touchTime($event)">
   <line ng-style="lineStyle">
     <item ng-repeat="item in items" ng-style="{top: (item.event.time - offsetBegin) / offsetTotal * 100 + '%', height: getDuration(item) / offsetTotal * 100 + '%'}"></item>
