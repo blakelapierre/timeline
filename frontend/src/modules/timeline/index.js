@@ -9,8 +9,11 @@ module.exports = {
     .directive('item',                  require('./directives/timeline/item'))
     .directive('itemAdder',             require('./directives/timeline/item-adder'))
     .directive('settings',              require('./directives/timeline/settings'))
+    .directive('week',                  require('./directives/timeline/week'))
+    .directive('year',                  require('./directives/timeline/year'))
     .directive('convertToNumber',       require('./directives/convertToNumber'))
     .directive('ngWheel',               require('./directives/ngWheel'))
 
     .factory('timelineData',            require('./factories/timelineData'))
+    .factory('taskStarter',            require('./factories/taskStarter'))
 };

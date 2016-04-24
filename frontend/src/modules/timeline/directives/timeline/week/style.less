@@ -1,0 +1,51 @@
+@height: 5px;
+
+@currentDayBackgroundColor: rgba(255, 255, 255, 0.9);
+
+week {
+  height: @height;
+
+  .week {
+    display: flex;
+
+    .day {
+      flex: 1 1 auto;
+
+      margin: 0;
+      padding: 0;
+
+      height: @height;
+      width: calc(1 / 7 * 100%);
+
+      border-right: 1px solid #fff;
+    }
+
+    &.sunday .sunday {
+      background-color: @currentDayBackgroundColor;
+    }
+
+    &.monday .monday {
+      background-color: @currentDayBackgroundColor;
+    }
+
+    &.tuesday .tuesday {
+      background-color: @currentDayBackgroundColor;
+    }
+
+    &.wednesday .wednesday {
+      background-color: @currentDayBackgroundColor;
+    }
+
+    &.thrusday .thrusday {
+      background-color: @currentDayBackgroundColor;
+    }
+
+    &.friday .friday {
+      background-color: @currentDayBackgroundColor;
+    }
+
+    &.saturday .saturday {
+      background-color: @currentDayBackgroundColor;
+    }
+  }
+}
