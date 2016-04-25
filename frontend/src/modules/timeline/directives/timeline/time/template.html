@@ -1,10 +1,11 @@
-<ng-transclude></ng-transclude>
+<ng-transclude class="time-transclude"></ng-transclude>
 <div class="overlay">
   <settings></settings>
-
+</div>
+<div class="bounds">
   <div class="time-scale">
     <div class="time-begin">
-      <div class="absolute-relative">{{timeBegin | date : 'mediumTime'}}</div>
+      <time-display class="absolute-relative" time="timeBegin"></time-display>
       <div class="">+{{((timeBegin - startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
     </div>
     <div class="time-current"
@@ -14,13 +15,14 @@
                 ng-click="goToNow()">Go To Now {{now - timeCurrent > 0 ? '+' : ''}}{{(now - timeCurrent) / 1000 | number : options.timeDecimals}}s ({{now | date : 'mediumTime'}})</button>
       </div>
       <div class="metrics">
-        <div class="absolute-relative">{{timeCurrent | date : 'mediumTime'}}</div>
+        <time-display time="timeCurrent"></time-display>
         <div class="">+{{((timeCurrent - startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
         <div class="">+|{{((timeCurrent - startOfDay + utcAdjustment) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
       </div>
     </div>
     <div class="time-end">
-      <div class="absolute-relative">{{timeEnd | date : 'mediumTime'}}</div>
+      <time-display time="timeEnd"></time-display>
+      <second-display time="timeEnd"></second-display>
       <div class="">+{{((timeEnd -startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
     </div>
   </div>

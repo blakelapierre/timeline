@@ -11,8 +11,10 @@ module.exports = {
     .directive('settings',              require('./directives/timeline/settings'))
     .directive('week',                  require('./directives/timeline/week'))
     .directive('year',                  require('./directives/timeline/year'))
+
     .directive('convertToNumber',       require('./directives/convertToNumber'))
     .directive('ngWheel',               require('./directives/ngWheel'))
+    .directive('timeDisplay',           require('./directives/timeDisplay'))
 
     .factory('timelineData',            require('./factories/timelineData'))
     .factory('taskStarter',            require('./factories/taskStarter'))

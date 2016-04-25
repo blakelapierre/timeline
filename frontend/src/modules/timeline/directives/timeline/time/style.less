@@ -1,10 +1,15 @@
 time {
-  position: relative;
+  display: flex;
+
+  .time-transclude {
+    position: relative;
+
+    flex: 1 1 auto;
+  }
 
   .overlay {
-    position: absolute;
+    flex: 0 1 auto;
 
-    right: 0;
     height: 100%;
 
     display: flex;
@@ -16,6 +21,29 @@ time {
     settings {
       margin-right: 1em;
     }
+
+    .time-day-location {
+      position: absolute;
+
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      width: 1px;
+
+      .bar {
+        position: absolute;
+
+        right: 0;
+        width: 1px;
+
+        background-color: #fff;
+      }
+    }
+  }
+
+  .bounds {
+    display: flex;
 
     .time-scale {
       position: relative;
@@ -50,6 +78,7 @@ time {
         .go-to-now-wrapper {
           position: absolute;
           right: 100%;
+          width: 500%;
 
           .go-to-now {
             margin-right: 1em;
@@ -80,25 +109,6 @@ time {
 
       .time-end {
         bottom: 0;
-      }
-    }
-
-    .time-day-location {
-      position: absolute;
-
-      top: 0;
-      right: 0;
-      bottom: 0;
-
-      width: 1px;
-
-      .bar {
-        position: absolute;
-
-        right: 0;
-        width: 1px;
-
-        background-color: #fff;
       }
     }
   }

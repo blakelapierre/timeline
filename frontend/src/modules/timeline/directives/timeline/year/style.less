@@ -1,16 +1,24 @@
 @height: 5px;
+@hoveredHeight: @height * 4;
 
 year {
+  position: relative;
+
   height: @height;
 
-  .year {
-    height: @height;
+  transition: all 0.25s ease-in-out;
 
+  &:hover {
+    height: @hoveredHeight;
+  }
+
+  .year {
+    height: 100%;
 
     .day-marker {
       position: absolute;
 
-      height: @height;
+      height: 100%;
       width: 2px;
     }
   }
