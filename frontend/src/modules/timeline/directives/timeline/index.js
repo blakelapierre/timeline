@@ -11,7 +11,7 @@ module.exports = () => {
       midnight.setHours(18, 30, 0, 0);
       // timelineData.newItem('marker', {time: midnight});
 
-      $scope.items = timelineData.getItems();
+      // $scope.items = timelineData.getItems();
 
       $scope.options = {
         timeDecimals: 0,
@@ -35,8 +35,19 @@ module.exports = () => {
       $scope.offsetBegin = new Date($scope.offsetBegin);
       $scope.offsetEnd = new Date($scope.offsetEnd);
 
+
+      $scope.items = timelineData.getItemsCursor({
+        startTime: new Date($scope.offsetBegin),
+        endTime: new Date($scope.offsetEnd),
+        maxCount: 100 // ?
+      });
+
       $scope.lineStyle = {
         top: 0
+      };
+
+      $scope.timeStyle = {
+
       };
 
       $scope.timeDayLocationBarStyle = {top: 0, height: '20%'};
@@ -110,17 +121,17 @@ module.exports = () => {
         $event.stopPropagation();
       };
 
-      $scope.setLineTimeOffset = offset => {
-        console.log('setting', $scope.lineTimeOffset, offset);
-        $scope.lineTimeOffset = offset;
-        $scope.$apply(() => setTime($scope));
-      };
-
       $scope.touchTime = $event => console.log({$event});
 
       $scope.goToNow = () => {
         $scope.lineTimeOffset = 0;
         setTime($scope);
+      };
+
+      $scope.setLineTimeOffset = offset => {
+        console.log('setting', $scope.lineTimeOffset, offset);
+        $scope.lineTimeOffset = offset;
+        $scope.$apply(() => setTime($scope));
       };
 
       let updater = startUpdating();
@@ -160,8 +171,12 @@ function setTime($scope) {
   $scope.timeBegin = $scope.timeCurrent - $scope.offsetHalf;
   $scope.timeEnd =  $scope.timeCurrent + $scope.offsetHalf;
 
+  $scope.timeScale = Math.round(($scope.timeEnd - $scope.timeBegin) / 1000) + ' seconds';
+
   $scope.lineOffset = -($scope.timeBegin - $scope.offsetBegin.getTime()) / $scope.offsetTotal;
   $scope.lineStyle.top = $scope.lineOffset * 100 + '%';
+
+  // $scope.timeStyle.height = '1100%'
 
   $scope.timeDayLocationBarStyle.top = (($scope.timeBegin - $scope.startOfDay) % $scope.lengthOfDay) / $scope.lengthOfDay * 100 + '%';
   $scope.timeDayLocationBarStyle.height = Math.min(1, $scope.offsetTotal / $scope.lengthOfDay) * 100 + '%';

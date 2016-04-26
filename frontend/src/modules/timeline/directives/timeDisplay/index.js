@@ -10,7 +10,6 @@ module.exports = () => {
 
       $scope.getWidth = () => {
         const now = new Date($scope.time);
-        console.log('now', now);
 
         return (((now.getHours() * 60 + now.getMinutes()) * 60) + now.getSeconds()) / (60 * 60 * 24);
       };

@@ -5,9 +5,9 @@
 <div class="item-content">
   <div class="times">
     <div class="background">
-      <span class="time">{{item.event.time | date : 'mediumTime'}}</span>
+      <time-display class="start-time" time="item.event.time"></time-display>
       <span class="duration">+{{getDuration(item) / 1000 | number : options.timeDecimals}}</span>
-      <span class="end-time" ng-if="item.duration && item.duration.endTime !== undefined">{{item.duration.endTime | date : 'mediumTime'}}</span>
+      <time-display class="end-time" ng-if="item.duration && item.duration.endTime !== undefined" time="item.duration.endTime"></time-display>
     </div>
   </div>
   <div class="body">

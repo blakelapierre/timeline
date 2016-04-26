@@ -4,13 +4,43 @@ const types = {
 };
 
 module.exports = () => {
-  const items = [];
+  const items = [],
+        cursors = [];
 
   for (let name in types) types[name] = types[name]();
 
-  return {addItem, endItem, getItems, newItem, updateItem};
+  return {addItem, endItem, getItems, getItemsCursor, newItem, updateItem};
 
   function getItems() { return items; }
+
+  function getItemsWhere(filter) {
+    return getWhere(items, filter);
+  }
+
+  function getWhere(items, filter, matched = []) {
+    items.forEach(item => {
+      if (filter(item)) matched.push(item);
+    });
+    return matched;
+  }
+
+  function getItemsCursor(config) {
+    const filter = cursorFilter(config),
+          cursor = getItemsWhere(filter);
+
+    cursors.push({config, items: cursor, filter});
+
+    return cursor;
+  }
+
+  function cursorFilter(config) {
+    return item => {
+      console.log('filter', {item, config});
+      if (item.duration && config.startTime && item.duration.endTime < config.startTime.getTime()) return false;
+      if (item.event && config.endTime && item.event.time > config.endTime.getTime()) return false;
+      return true;
+    };
+  }
 
   function addItem(time, data) {
     return newItem('generic', {time, data});
@@ -19,8 +49,18 @@ module.exports = () => {
   function newItem(type, data) {
     const item = types[type].create(data);
     items.push(item);
+
+    updateCursors(item);
+
     console.log(items);
     return item;
+
+    function updateCursors(item) {
+      cursors.forEach(({config, items, filter}) => {
+        if (filter(item)) items.push(item);
+      });
+      console.log('updated', {cursors});
+    }
   }
 
   function endItem(item, endTime) {

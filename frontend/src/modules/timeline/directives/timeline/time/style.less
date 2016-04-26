@@ -45,6 +45,24 @@ time {
   .bounds {
     display: flex;
 
+    .shown-duration {
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+      align-items: center;
+
+      width: 1em;
+
+        text-align: center;
+      div {
+        white-space: nowrap;
+
+        transform-origin: 50% 50%;
+        transform: rotate(270deg);
+      }
+    }
+
     .time-scale {
       position: relative;
       top: 0;
