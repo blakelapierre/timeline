@@ -88,13 +88,15 @@ module.exports = () => {
 
           const [_, hours, minutes, ampm] = at;
 
-          const now = new Date();
+          const scheduled = new Date();
 
-          now.setHours(parseInt(hours) + (ampm === 'pm' ? 12 : 0), parseInt(minutes), 0);
+          scheduled.setHours(parseInt(hours) + (ampm === 'pm' ? 12 : 0), parseInt(minutes), 0);
 
-          console.log({now});
+          const time = scheduled.getTime();
 
-          $scope.currentItem.event.time = now.getTime();
+          // timelineData.updateItem($scope.newItem, {event: {time}});
+
+          $scope.newItem.event.time = time;
         }
 
         if (!$scope.isNew && $scope.currentItem) updateItem(timelineData, $scope.currentItem, $scope.newItem);

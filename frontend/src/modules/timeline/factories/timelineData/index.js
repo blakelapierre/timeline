@@ -171,6 +171,7 @@ function event() {
 
   function update(event, data) {
     console.log('update event', event, data);
+    for (let key in data) event[key] = data[key];
   }
 }
 
