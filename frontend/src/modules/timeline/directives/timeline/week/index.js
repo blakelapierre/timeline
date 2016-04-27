@@ -3,10 +3,20 @@ module.exports = () => {
     restrict: 'E',
     template: require('./template.html'),
     controller: ['$scope', $scope => {
-      // $scope.getTimeOfDayColor = () => `rgba(255, 255, 255, ${((new Date($scope.now).getHours() - 12) % 23 ) / 23})`;
-      $scope.getTimeOfDayColor = () => `rgba(255, 255, 255, ${Math.cos(new Date($scope.now).getHours() / 23)})`;
-      $scope.getInverseTimeOfDayColor = () => `rgba(255, 255, 255, ${1 - Math.cos(new Date($scope.now).getHours() / 23)})`;
-      $scope.getDayMarkerPosition = () => `${(new Date($scope.now) - new Date(new Date($scope.now).getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24) / 365 * 100}%` ; // doesn't handle leap years!
+      $scope.currentDay = toDayName(new Date($scope.now).getDay());
     }]
   };
 };
+
+
+function toDayName(dayNumber) {
+  switch (dayNumber) {
+    case 0: return 'sunday';
+    case 1: return 'monday';
+    case 2: return 'tuesday';
+    case 3: return 'wednesday';
+    case 4: return 'thursday';
+    case 5: return 'friday';
+    case 6: return 'saturday';
+  }
+}

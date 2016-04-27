@@ -131,6 +131,7 @@ module.exports = () => {
       $scope.setLineTimeOffset = offset => {
         console.log('setting', $scope.lineTimeOffset, offset);
         $scope.lineTimeOffset = offset;
+
         $scope.$apply(() => setTime($scope));
       };
 
@@ -180,6 +181,10 @@ function setTime($scope) {
 
   $scope.timeDayLocationBarStyle.top = (($scope.timeBegin - $scope.startOfDay) % $scope.lengthOfDay) / $scope.lengthOfDay * 100 + '%';
   $scope.timeDayLocationBarStyle.height = Math.min(1, $scope.offsetTotal / $scope.lengthOfDay) * 100 + '%';
+
+  if ($scope.lineTimeOffset > 0) $scope.orientation = 'past';
+  else if ($scope.lineTimeOffset < 0) $scope.orientation = 'future';
+  else $scope.orientation = 'now';
 
   if ($scope.timeEnd > $scope.startOfDay + $scope.lengthOfDay) {
     // will need to wrap/show second bar

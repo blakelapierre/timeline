@@ -59,7 +59,6 @@ module.exports = () => {
       cursors.forEach(({config, items, filter}) => {
         if (filter(item)) items.push(item);
       });
-      console.log('updated', {cursors});
     }
   }
 

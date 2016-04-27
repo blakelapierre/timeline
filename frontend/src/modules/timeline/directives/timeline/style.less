@@ -1,58 +1,76 @@
 timeline {
   display: flex;
-  flex-direction: column;
 
-  year {
-    z-index: 4;
-  }
-
-  week {
-    z-index: 4;
-  }
-
-  .view {
-    position: relative;
-
+  .orientation {
     flex: 1 1 auto;
 
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
-    time {
-      position: absolute;
-      // height: 1100%;
+    &.now {
+      border: solid 1px #000;
+    }
 
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    &.past {
+      border: solid 1px #f00;
+    }
 
-      line {
+    &.future {
+      border: solid 1px #00f;
+    }
+
+    year {
+      z-index: 4;
+    }
+
+    week {
+      z-index: 4;
+    }
+
+    .view {
+      position: relative;
+
+      flex: 1 1 auto;
+
+      overflow: hidden;
+
+      time {
         position: absolute;
+        // height: 1100%;
 
-        height: 100%;
-        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
-        item {
+        line {
           position: absolute;
 
+          height: 100%;
           width: 100%;
 
-          left: 0;
+          item {
+            position: absolute;
+
+            width: 100%;
+
+            left: 0;
+          }
         }
+      }
+
+      settings {
+        position: absolute;
+
+        right: 0;
+        top: 0;
       }
     }
 
-    settings {
-      position: absolute;
-
+    item-adder {
+      bottom: 0;
+      left: 0;
       right: 0;
-      top: 0;
     }
-  }
-
-  item-adder {
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
 }

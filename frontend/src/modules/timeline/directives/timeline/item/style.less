@@ -1,11 +1,9 @@
 item {
-  height: 100%;
-
   display: flex;
 
   overflow: visible;
 
-  background-color: #111;
+  background-color: #333;
 
   font-size: 0.85em;
 
@@ -13,12 +11,11 @@ item {
 
   .end {
     min-height: 3em;
-    height: 100%;
-    // position: absolute;
-    // bottom: 0;
+
+    display: flex;
 
     button {
-      height: 100%;
+      flex: 1 1 auto;
 
       margin: 0;
       padding: 0 0.5em;
@@ -36,71 +33,62 @@ item {
     }
   }
 
-  .item-content {
+  .times {
     height: 100%;
-    width: 100%;
 
     display: flex;
 
-    background-color: #111;
+    flex: 0 0 auto;
 
-    .times {
+    align-items: stretch;
+
+    white-space: nowrap;
+
+    .background {
+      min-height: 3em;
       height: 100%;
 
       display: flex;
-
-      flex: 0 0 auto;
-
-      align-items: stretch;
-
-      white-space: nowrap;
-
-      .background {
-        min-height: 3em;
-        height: 100%;
-
-        display: flex;
-        flex-direction: column;
-
-        justify-content: space-between;
-
-        background-color: hsla(120, 100%, 30%, 1);
-
-        .time {
-          // background-color: #fff;
-          // color: #000;
-        }
-
-        .duration {
-          text-align: center;
-        }
-
-        .end-time {
-          background-color: #000;
-          // color: #000;
-        }
-      }
-    }
-
-    .body {
-      display: flex;
       flex-direction: column;
 
-      justify-content: flex-end;
+      justify-content: space-between;
 
-      width: 100%;
+      background-color: hsla(120, 100%, 30%, 1);
 
-      min-height: 1em;
-
-      font-size: 1rem;
-
-      text-align: center;
-
-      border: solid 1px rgba(255, 255, 255, 0.05);
-
-      .data {
-        background-color: rgba(255, 255, 255, 0.05);
+      .time {
+        // background-color: #fff;
+        // color: #000;
       }
+
+      .duration {
+        text-align: center;
+      }
+
+      .end-time {
+        background-color: #000;
+        // color: #000;
+      }
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    width: 100%;
+
+    min-height: 1em;
+
+    font-size: 1rem;
+
+    text-align: center;
+
+    border: solid 1px rgba(255, 255, 255, 0.05);
+
+    .data {
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
 
@@ -109,7 +97,7 @@ item {
 
     border: solid 1px #444;
 
-    z-index: 2;
+    z-index: 1;
 
     .item-content {
 

@@ -1,13 +1,15 @@
-<year></year>
-<week></week>
+<div ng-class="[{'orientation': true}, orientation]">
+  <year></year>
+  <week></week>
 
-<div class="view">
-  <time ng-style="timeStyle" ng-wheel="wheelTime($event)" ng-touch="touchTime($event)">
-    <line ng-style="lineStyle">
-      <item ng-repeat="item in items" ng-style="{top: (item.event.time - offsetBegin) / offsetTotal * 100 + '%', height: getDuration(item) / offsetTotal * 100 + '%'}"></item>
-    </line>
-    <settings></settings>
-  </time>
+  <div class="view">
+    <time ng-style="timeStyle" ng-wheel="wheelTime($event)" ng-touch="touchTime($event)">
+      <line ng-style="lineStyle">
+        <item ng-repeat="item in items" ng-style="{top: (item.event.time - offsetBegin) / offsetTotal * 100 + '%', 'height': getDuration(item) / offsetTotal * 100 + '%'}"></item>
+      </line>
+      <settings></settings>
+    </time>
+  </div>
+
+  <item-adder></item-adder>
 </div>
-
-<item-adder></item-adder>
