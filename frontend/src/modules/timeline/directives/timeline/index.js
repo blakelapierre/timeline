@@ -79,6 +79,24 @@ module.exports = () => {
       $scope.newItemKeyup = $event => {
         console.log('keypress', $event, $scope.currentItem);
         if ($event.keyCode === 13) $scope.addNewItem();
+
+        const at = ($scope.newItem.data.text || '').match(/@(1?\d):([0-5]\d)\s?(PM|AM)+/i);
+
+        if (at) {
+          console.log({at});
+
+
+          const [_, hours, minutes, ampm] = at;
+
+          const now = new Date();
+
+          now.setHours(parseInt(hours) + (ampm === 'pm' ? 12 : 0), parseInt(minutes), 0);
+
+          console.log({now});
+
+          $scope.currentItem.event.time = now.getTime();
+        }
+
         if (!$scope.isNew && $scope.currentItem) updateItem(timelineData, $scope.currentItem, $scope.newItem);
       };
 
