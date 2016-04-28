@@ -34,8 +34,14 @@ function getPercentageOfDay(date) {
   return (((date.getHours() * 60 + date.getMinutes()) * 60) + date.getSeconds()) / (60 * 60 * 24);
 }
 
+const geolocation = {position:{coords: {latitude: 0, longitude: 0}}};
+
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(position => geolocation.position = position);
+}
+
 function getLightAlpha(time) {
-  const times = suncalc.getTimes(new Date(time), 0, 0);
+  const times = suncalc.getTimes(new Date(time), geolocation.position.coords.latitude, geolocation.position.coords.longitude);
 
   console.log(times);
 
