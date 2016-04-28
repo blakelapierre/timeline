@@ -21,45 +21,33 @@ time {
     settings {
       margin-right: 1em;
     }
-
-    .time-day-location {
-      position: absolute;
-
-      top: 0;
-      right: 0;
-      bottom: 0;
-
-      width: 1px;
-
-      .bar {
-        position: absolute;
-
-        right: 0;
-        width: 1px;
-
-        background-color: #fff;
-      }
-    }
   }
 
   .bounds {
     display: flex;
 
     .shown-duration {
+      width: 1em;
+
+      padding: 0px 1px;
+
       display: flex;
       flex-direction: column;
 
       justify-content: center;
       align-items: center;
 
-      width: 1em;
+      text-align: center;
 
-        text-align: center;
+      font-size: 0.75em;
+
       div {
+        line-height: 1em;
+
         white-space: nowrap;
 
         transform-origin: 50% 50%;
-        transform: rotate(270deg);
+        transform: rotate(90deg) translateY(15%);
       }
     }
 
@@ -130,6 +118,25 @@ time {
       .time-end {
         bottom: 0;
       }
+    }
+  }
+
+  .time-day-location {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 1px;
+
+    .bar {
+      position: absolute;
+
+      right: 0;
+      width: 1px;
+
+      background-color: #fff;
     }
   }
 }

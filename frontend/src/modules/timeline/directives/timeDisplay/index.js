@@ -8,11 +8,11 @@ module.exports = () => {
     controller: ['$scope', $scope => {
       $scope.filter = 'mediumTime';
 
-      $scope.getWidth = () => {
-        const now = new Date($scope.time);
-
-        return (((now.getHours() * 60 + now.getMinutes()) * 60) + now.getSeconds()) / (60 * 60 * 24);
-      };
+      $scope.getWidth = () => getPercentageOfDay(new Date($scope.time));
     }]
   };
 };
+
+function getPercentageOfDay(date) {
+  return (((date.getHours() * 60 + date.getMinutes()) * 60) + date.getSeconds()) / (60 * 60 * 24);
+}

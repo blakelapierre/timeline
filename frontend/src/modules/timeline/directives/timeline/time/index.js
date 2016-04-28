@@ -1,17 +1,22 @@
-module.exports = ['$swipe', $swipe => {
+module.exports = () => {
   return {
     restrict: 'E',
     scope: false,
     transclude: true,
     template: require('./template.html'),
     link($scope, element, attributes) {
-      // let startY;
-      // $swipe.bind(element, {
-      //   start:  ({x, y}) => startY = y,
-      //   move:   ({x, y}) => {if (y - startY !== 0) $scope.setLineTimeOffset($scope.lineTimeOffset + (1 / (y - startY)) * $scope.offsetTotal);},
-      //   end:    event => console.log('end', event),
-      //   cancel: event => console.log('cancel', event),
-      // });
+      // fails horibly if more than one day between begin and end
+      $scope.getTimeScaleBackground = () => `linear-gradient(rgba(255, 255, 255, ${getLightAlpha($scope.timeBegin)}) 0%,
+                                                             rgba(255, 255, 255, ${getLightAlpha($scope.timeCurrent)}) 50%,
+                                                             rgba(255, 255, 255, ${getLightAlpha($scope.timeEnd)}) 100%)`;
     }
   };
-}];
+};
+
+function getPercentageOfDay(date) {
+  return (((date.getHours() * 60 + date.getMinutes()) * 60) + date.getSeconds()) / (60 * 60 * 24);
+}
+
+function getLightAlpha(time) {
+  return Math.sin(-(Math.PI / 2) * (1 - 4 * getPercentageOfDay(new Date(time)))) / 2 + 0.5;
+}

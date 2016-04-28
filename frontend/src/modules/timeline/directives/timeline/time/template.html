@@ -3,8 +3,7 @@
 
 </div>
 <div class="bounds">
-  <div class="shown-duration"><div>←{{timeScale}}→</div></div>
-  <div class="time-scale">
+  <div class="time-scale" ng-style="{'background': getTimeScaleBackground()}">
     <div class="time-begin">
       <time-display class="absolute-relative" time="timeBegin"></time-display>
       <div class="">+{{((timeBegin - startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
@@ -27,6 +26,7 @@
       <div class="">+{{((timeEnd -startOfDay) % lengthOfDay) / 1000 | number : options.timeDecimals}}</div>
     </div>
   </div>
+  <div class="shown-duration"><div>←{{timeScale}}→</div></div>
   <div class="time-day-location">
     <div class="bar" ng-style="timeDayLocationBarStyle"></div>
     <div class="bar" ng-style="timeDayLocationOverflowBarStyle"></div>
