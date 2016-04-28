@@ -15,11 +15,29 @@ year {
   .year {
     height: 100%;
 
-    .day-marker {
-      position: absolute;
+    display: flex;
 
-      height: 100%;
-      width: 2px;
+    .month {
+      flex: 1 1 auto; // should be different
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      border-right: solid 1px #999;
+
+      font-size: 0.55em;
+
+      color: rgba(255, 255, 255, 0.25);
     }
+  }
+
+  .day-marker {
+    position: absolute;
+
+    top: 0;
+    height: 100%;
+    width: 2px;
   }
 }

@@ -29,7 +29,7 @@ module.exports = () => {
       $scope.offsetTotal = $scope.options.defaultViewPeriod;
       $scope.offsetHalf = $scope.offsetTotal / 2;
 
-      $scope.timeCurrent = new Date();
+      $scope.timeCurrent = $scope.nowDate = new Date();
       $scope.now = $scope.timeCurrent.getTime();
       $scope.offsetBegin = ($scope.offsetEnd = $scope.timeCurrent.getTime() + $scope.offsetHalf) - $scope.offsetTotal;
       $scope.offsetBegin = new Date($scope.offsetBegin);
@@ -184,7 +184,8 @@ module.exports = () => {
 };
 
 function setTime($scope) {
-  $scope.now = new Date().getTime();
+  $scope.nowDate = new Date();
+  $scope.now = $scope.nowDate.getTime();
 
   $scope.startOfDay = startOfDay().getTime() + $scope.options.dayStartOffset * 1000;
   $scope.timeCurrent = new Date($scope.now - $scope.lineTimeOffset).getTime();

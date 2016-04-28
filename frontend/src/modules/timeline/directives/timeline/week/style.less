@@ -4,11 +4,13 @@
 @dayColor: hsla(195, 600%, 80%, 0.6);
 @nightColor: hsla(195, 600%, 30%, 0.6);
 
-@currentDayBackground: hsla(0, 0%, 100%, 0.5);
+@currentDayBackground: hsla(0, 0%, 100%, 0.25);
 @dayBackground: hsla(0, 0%, 50%, 0.3);
 
-@currentDayBackground: radial-gradient(circle farthest-corner at 50% 50%, @dayColor 0%, @nightColor 100%);
-@dayBackground: radial-gradient(circle farthest-corner at 50% 50%, darken(@dayColor, 40%) 0%, darken(@nightColor, 0%) 100%);
+@currentDayColor: #666;
+
+// @currentDayBackground: radial-gradient(circle farthest-corner at 50% 50%, @dayColor 0%, @nightColor 100%);
+// @dayBackground: radial-gradient(circle farthest-corner at 50% 50%, darken(@dayColor, 40%) 0%, darken(@nightColor, 0%) 100%);
 
 
 // @currentDayBackground: radial-gradient(circle farthest-corner at 50% 50%, hsl(60, 10%, 90%) 0%, hsl(190, 10%, 50%) 100%);
@@ -33,43 +35,69 @@ week {
     .day {
       flex: 1 1 auto;
 
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
       margin: 0;
       padding: 0;
 
       height: 100%;
       width: calc(1 / 7 * 100%);
 
-      // border-right: 1px solid #fff;
+      border-right: 1px solid #666;
 
-      background: @dayBackground;
+      text-align: center;
+
+      color: rgba(255, 255, 255, 0.35);
+
+      font-size: 0.55em;
     }
 
     &.sunday .sunday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
 
     &.monday .monday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
 
     &.tuesday .tuesday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
 
     &.wednesday .wednesday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
 
     &.thursday .thursday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
 
     &.friday .friday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
 
     &.saturday .saturday {
       background: @currentDayBackground;
+      color: @currentDayColor;
     }
+  }
+
+  .time-marker {
+    position: absolute;
+
+    top: 0;
+    height: 100%;
+    width: 2px;
+
+    background-color: #ddd;
   }
 }

@@ -1,9 +1,11 @@
 <div ng-class="[{'week': true}, currentDay]">
-  <span class="day sunday"></span>
-  <span class="day monday"></span>
-  <span class="day tuesday"></span>
-  <span class="day wednesday"></span>
-  <span class="day thursday"></span>
-  <span class="day friday"></span>
-  <span class="day saturday"></span>
+  <span class="day sunday">s</span>
+  <span class="day monday">m</span>
+  <span class="day tuesday">t</span>
+  <span class="day wednesday">w</span>
+  <span class="day thursday">t</span>
+  <span class="day friday">f</span>
+  <span class="day saturday">s</span>
 </div>
+<div class="time-marker"
+       ng-style="{'left': getTimeMarkerPosition()}"></div>

@@ -22,7 +22,7 @@ function gradient(count, fn, start, end) {
   const components = new Array(count);
 
   for (let i = 0; i < count; i++) components[i] = `rgba(255, 255, 255, ${fn(new Date(start + (end - start) * unit * i))}) ${unit * i * 100}%`;
-console.log(components);
+
   return components.join(',');
 
   // return (new Array(count))
@@ -42,8 +42,6 @@ if ("geolocation" in navigator) {
 
 function getLightAlpha(time) {
   const times = suncalc.getTimes(new Date(time), geolocation.position.coords.latitude, geolocation.position.coords.longitude);
-
-  console.log(times);
 
   return Math.sin(-(Math.PI / 2) * (1 - 4 * getPercentageOfDay(new Date(time)))) / 4 + 0.25;
 }

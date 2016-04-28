@@ -4,6 +4,12 @@ module.exports = () => {
     template: require('./template.html'),
     controller: ['$scope', $scope => {
       $scope.currentDay = toDayName(new Date($scope.now).getDay());
+
+      $scope.getTimeMarkerPosition = () => {
+        const date = new Date($scope.now);
+
+        return `${(date.getDay() / 7 + date.getHours() / 24 / 7 + date.getMinutes() / 60 / 24 / 7 + date.getSeconds() / 60 / 60 / 24 / 7) * 100}%` ; // doesn't handle leap years!?
+      };
     }]
   };
 };
