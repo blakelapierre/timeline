@@ -1,6 +1,8 @@
 @height: 5px;
 @hoveredHeight: @height * 4;
 
+@selectedMonthBackgroundColor: rgba(255, 255, 255, 0.25);
+
 year {
   position: relative;
 
@@ -31,6 +33,19 @@ year {
 
       color: rgba(255, 255, 255, 0.25);
     }
+
+    &.january .january { background-color: @selectedMonthBackgroundColor; }
+    &.february .february { background-color: @selectedMonthBackgroundColor; }
+    &.march .march { background-color: @selectedMonthBackgroundColor; }
+    &.april .april { background-color: @selectedMonthBackgroundColor; }
+    &.may .may { background-color: @selectedMonthBackgroundColor; }
+    &.june .june { background-color: @selectedMonthBackgroundColor; }
+    &.july .july { background-color: @selectedMonthBackgroundColor; }
+    &.august .august { background-color: @selectedMonthBackgroundColor; }
+    &.september .september { background-color: @selectedMonthBackgroundColor; }
+    &.october .october { background-color: @selectedMonthBackgroundColor; }
+    &.november .november { background-color: @selectedMonthBackgroundColor; }
+    &.december .december { background-color: @selectedMonthBackgroundColor; }
   }
 
   .day-marker {
